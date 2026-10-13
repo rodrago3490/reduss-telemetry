@@ -1,6 +1,12 @@
 # Documento técnico y roadmap — App de telemetría para Assetto Corsa
 
-Actualizado: 2026-10-13
+Actualizado: 2026-10-14
+
+> **Nota de estado (2026-10-14):** el entorno de desarrollo está listo y verificado, y el
+> repositorio existe en <https://github.com/rodrago3490/reduss-telemetry> (público). Assetto
+> Corsa **no está instalado en la máquina de desarrollo**: el juego vive en otro PC al que se
+> accede por separado, así que las tareas de la Fase 0 que dependen del juego siguen pendientes.
+> Ver `docs/fase-0-analisis-inicial.md`.
 
 ## Resumen
 
@@ -19,6 +25,8 @@ Estas decisiones están cerradas; cualquier cambio debe reflejarse aquí antes d
 | Lenguaje | C++, con código simple, pocas dependencias y estructura clara (es el primer lenguaje del autor) |
 | Entorno | Windows, Visual Studio con el componente de C++ ya instalado |
 | Coche inicial | RSS Formula Hybrid, la versión más reciente (Formula Hybrid 2026, a confirmar en la Fase 0) |
+| Nombre de la aplicación | Reduss Telemetry |
+| Repositorio | `reduss-telemetry`, público, en <https://github.com/rodrago3490/reduss-telemetry> |
 | Pista inicial | Spa-Francorchamps |
 | Referencia de comparación | Mejor vuelta válida de la sesión |
 | Alcance del pit wall | Solo el coche propio |
@@ -235,6 +243,13 @@ El mayor riesgo es que el coche elegido es muy reciente: la Fase 0 existe para c
 
 Fuentes: [Traxion, 9 de octubre de 2026](https://traxion.gg/race-sim-studio-releases-2026-spec-formula-1-style-mod-for-assetto-corsa/) para el lanzamiento, las apps incluidas y el requisito de CSP.
 
+> **Aviso sobre esta fuente (2026-10-14):** la fecha de lanzamiento, las apps incluidas y el
+> requisito de CSP **no se han podido verificar de forma independiente**; salen de esta noticia.
+> Además, el dominio del fabricante que se citó en la sesión de planificación
+> (`race-sim-studio.com`) **no existe**: la resolución DNS falla. El dominio real parece ser
+> `racesimstudio.com`. Hay que confirmar la URL del fabricante y su página del coche antes de dar
+> por buenos los requisitos, y anotar de dónde sale cada afirmación (tarea 4 de la Fase 0).
+
 ## Cómo trabajar con Claude Code
 
 Cada fase se trabaja en pasos pequeños: una tarea, compilar, probar, marcar la casilla y hacer commit.
@@ -281,11 +296,14 @@ Marca cada fase solo cuando todos sus criterios de terminado estén marcados. El
 
 **Objetivo:** dejar el entorno listo y confirmar, con el coche y la pista reales, qué datos salen de la memoria compartida antes de diseñar nada. **Depende de:** nada.
 
+**Estado (2026-10-14):** 3 de 9 tareas hechas. Las 6 restantes necesitan Assetto Corsa instalado,
+que no está en la máquina de desarrollo. Detalle en `docs/fase-0-analisis-inicial.md`.
+
 **Qué cubre**
 
-- [ ] Instalar Visual Studio con la carga de trabajo de C++ para escritorio, CMake y Git
-- [ ] Crear el repositorio, el .gitignore y un CMakeLists mínimo que compile un programa de prueba
-- [ ] Escribir el CLAUDE.md con objetivo, decisiones y reglas (sección Cómo trabajar con Claude Code)
+- [x] Instalar Visual Studio con la carga de trabajo de C++ para escritorio, CMake y Git
+- [x] Crear el repositorio, el .gitignore y un CMakeLists mínimo que compile un programa de prueba
+- [x] Escribir el CLAUDE.md con objetivo, decisiones y reglas (sección Cómo trabajar con Claude Code)
 - [ ] Confirmar la instalación: AC original, Custom Shaders Patch 0.2.11 o posterior, RSS Formula Hybrid (nombre exacto de la carpeta del coche y versión) y la pista Spa-Francorchamps
 - [ ] Escribir un programa mínimo que vuelque los tres bloques de memoria compartida a un archivo mientras das 2 o 3 vueltas en Spa
 - [ ] Revisar el volcado: qué campos cambian, cuáles están siempre a cero y cómo se ven ERS, DRS y aerodinámica activa
@@ -558,11 +576,29 @@ Nada de esto entra en las fases 0 a 11; se recoge para dejar la arquitectura pre
 
 Cada una se cierra en la fase indicada; anota la respuesta aquí cuando se decida.
 
+**De la Fase 0**
+
 - [ ] ¿Es el Formula Hybrid 2026 el coche exacto y cuál es el nombre de su carpeta? (Fase 0)
 - [ ] ¿Qué canales de ERS y aerodinámica activa expone realmente el RSS 2026? (Fase 0)
 - [ ] ¿Qué aporta esta app frente a RSS Race Lab? (Fase 0)
-- [ ] ¿Cómo se llamará la aplicación? (antes de crear el repositorio)
-- [ ] ¿El repositorio será público o privado? (Fase 0)
+- [ ] ¿Dónde se instala Assetto Corsa: en este PC o en otro? El juego no está en la máquina de
+      desarrollo. Si vive en otro PC, hay que decidir cómo se copia allí el ejecutable y cómo se
+      traen los volcados de vuelta (Fase 0)
+- [ ] ¿Se usa Content Manager o el launcher original? Decide dónde vive la carpeta de setups que
+      leerá la Fase 8 (Fase 0)
+- [ ] ¿Qué versión exacta de Custom Shaders Patch se instala? El roadmap solo exige "0.2.11 o
+      posterior", pero CSP cambia campos entre versiones y hay que anotar el número exacto (Fase 0)
+- [ ] ¿Cómo se obtiene el coche, con qué versión y por qué vía? (Fase 0)
+
+**Cerradas**
+
+- [x] ¿Cómo se llamará la aplicación? (antes de crear el repositorio) → **Reduss Telemetry**,
+      repositorio `reduss-telemetry`. Decidido el 2026-10-14
+- [x] ¿El repositorio será público o privado? (Fase 0) → **Público**, en
+      <https://github.com/rodrago3490/reduss-telemetry>. Decidido el 2026-10-14
+
+**De fases posteriores**
+
 - [ ] ¿LZ4 o Zstandard para comprimir las vueltas? (Fase 3)
 - [ ] ¿Las curvas de Spa se definen a mano o se detectan automáticamente? (Fase 7)
 - [ ] ¿El pit wall se verá en un segundo monitor, en otro PC o en el móvil? (Fases 5 y 10)
