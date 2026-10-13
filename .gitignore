@@ -1,0 +1,39 @@
+# --- Salida de compilacion ---
+/build/
+/out/
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+compile_commands.json
+*.obj
+*.exe
+*.pdb
+*.ilk
+*.lib
+*.exp
+
+# --- Visual Studio ---
+.vs/
+*.user
+*.suo
+*.sln.docstates
+
+# --- Datos locales: vueltas grabadas, volcados, bases de datos ---
+# No se versionan: son grandes y se regeneran. Ver data/LEEME.md
+/data/
+*.aclap
+*.sqlite
+*.sqlite3
+*.db
+
+# --- Volcados de memoria compartida de la Fase 0 ---
+/dumps/
+*.acdump
+
+# --- Editores y sistema ---
+Thumbs.db
+desktop.ini
+*.swp
+
+# --- Dependencias descargadas (a partir de la Fase 3) ---
+/_deps/

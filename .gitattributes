@@ -1,0 +1,22 @@
+# Normaliza los finales de linea en el repositorio: LF dentro de Git,
+# y cada plataforma usa los suyos al hacer checkout.
+* text=auto
+
+*.cpp   text diff=cpp
+*.h     text diff=cpp
+*.hpp   text diff=cpp
+*.txt   text
+*.md    text
+*.json  text
+*.yml   text
+*.cmake text
+
+CMakeLists.txt text
+
+# Binarios: que Git no intente convertirlos ni mostrar diferencias de texto
+*.png  binary
+*.jpg  binary
+*.ico  binary
+*.aclap binary
+*.acdump binary
+*.sqlite binary
